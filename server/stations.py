@@ -37,21 +37,21 @@ class Stations:
     response = urllib2.urlopen(self.url)
     rows = csv.DictReader( response, self.fieldnames)
     for row in rows:
-        for i in range(24):
-            stcode = int(str(row["ce01"]) + str(row["ce02"]) + str(row["ce03"]))
-            station = server.seed.Station.query(server.seed.Station.StationCod==stcode).get()
-            if station:
-                model.UpdateAire(  '' + row["ce01"] + row["ce02"] + row["ce03"] + row["parameter"] + row["year"] + row["month"] + row["day"] + str(i),
-                                    datetime.datetime(int(row["year"]), int(row["month"]), int(row["day"]), i, 0),
-                                    int(row["parameter"]),
-                                    int(row["tecnic"]),
-                                    int(row["period"]),
-                                    float(row["hour" + str(i)]),
-                                    int(row["ce01"]),
-                                    int(row["ce02"]),
-                                    int(row["ce03"]),
-                                    station
-                                    )
+        hour = datetime.datetime.now().hour
+        stcode = int(str(row["ce01"]) + str(row["ce02"]) + str(row["ce03"]))
+        station = server.seed.Station.query(server.seed.Station.StationCod==stcode).get()
+        if station:
+            model.UpdateAire(  '' + row["ce01"] + row["ce02"] + row["ce03"] + row["parameter"] + row["year"] + row["month"] + row["day"] + str(hour),
+                                datetime.datetime(int(row["year"]), int(row["month"]), int(row["day"]), hour, 0),
+                                int(row["parameter"]),
+                                int(row["tecnic"]),
+                                int(row["period"]),
+                                float(row["hour" + str(hour)]),
+                                int(row["ce01"]),
+                                int(row["ce02"]),
+                                int(row["ce03"]),
+                                station
+                                )
 
 
 stations = Stations()

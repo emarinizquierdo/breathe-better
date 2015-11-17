@@ -18,7 +18,7 @@ angular.module('datafestApp')
         $scope.shData = shData;
 
         $scope.shData.day = new Date();
-        $scope.shData.day.setHours($scope.shData.day.getHours() - 2);
+        $scope.shData.day.setHours($scope.shData.day.getHours() - 1);
         $scope.shData.day.setMinutes(0);
         $scope.shData.day.setSeconds(0);
         $scope.shData.day.setMilliseconds(0);

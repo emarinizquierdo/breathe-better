@@ -11,14 +11,11 @@ angular.module('datafestApp')
 
         _pollution.get = function(p_date, p_pollution_parameter, p_callback) {
 
-            var time = new Date();
-            time.setHours(time.getHours()-2);
-
             Aire.query({
-                    year: time.getFullYear(),
-                    month: time.getMonth() + 1,
-                    day: time.getDate(),
-                    hour: time.getHours(),
+                    year: p_date.getFullYear(),
+                    month: p_date.getMonth() + 1,
+                    day: p_date.getDate(),
+                    hour: p_date.getHours(),
                     parameter: p_pollution_parameter
                 }, function(data) {
 
