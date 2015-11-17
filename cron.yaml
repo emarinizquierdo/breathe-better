@@ -1,0 +1,4 @@
+cron:
+- description: stations cron
+  url: /tasks/stations
+  schedule: every 1 hours

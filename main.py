@@ -3,10 +3,16 @@ import webapp2
 import time
 
 import model
+import server.seed
+import logging
+
+logging.info('Main')
 
 
-def AsDict(guest):
-  return {'id': guest.key.id(), 'first': guest.first, 'last': guest.last}
+def AsDict(aire):
+  return {'id': aire.key.id(), 'timestamp' : str(aire.timestamp), 'parameter' : aire.parameter, 'tecnic' : aire.tecnic,
+          'period' : aire.period, 'value' : aire.value, 'ce01' : aire.ce01, 'ce02' : aire.ce02, 'ce03' : aire.ce03, 
+          'stationObject' : { 'Latitud_D' : aire.station.Latitud_D, 'Longitud_D' : aire.station.Longitud_D} }
 
 
 class RestHandler(webapp2.RequestHandler):
@@ -24,8 +30,13 @@ class RestHandler(webapp2.RequestHandler):
 class QueryHandler(RestHandler):
 
   def get(self):
-    guests = model.AllGuests()
-    r = [ AsDict(guest) for guest in guests ]
+    parameter = self.request.get('parameter')
+    year = self.request.get('year', default_value=2015)
+    month = self.request.get('month', default_value=1)
+    day = self.request.get('day', default_value=1)
+    hour = self.request.get('hour', default_value=1)
+    aires = model.AllAire(parameter, year, month, day, hour)
+    r = [ AsDict(aire) for aire in aires ]
     self.SendJson(r)
 
 
@@ -53,12 +64,17 @@ class DeleteHandler(RestHandler):
     r = json.loads(self.request.body)
     model.DeleteGuest(r['id'])
 
+class SeedHandler(RestHandler):
+
+  def get(self):
+    seed = server.seed.Inflate()
 
 APP = webapp2.WSGIApplication([
-    ('/rest/query', QueryHandler),
-    ('/rest/insert', InsertHandler),
-    ('/rest/delete', DeleteHandler),
-    ('/rest/update', UpdateHandler),
+    ('/api/aires', QueryHandler),
+    ('/seed', SeedHandler)
+    #('/rest/insert', InsertHandler),
+    #('/rest/delete', DeleteHandler),
+    #('/rest/update', UpdateHandler),
 ], debug=True)
 
 

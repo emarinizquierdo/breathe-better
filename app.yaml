@@ -1,4 +1,4 @@
-application: your-app-id
+application: breathe-better
 version: 1
 runtime: python27
 threadsafe: true
@@ -9,7 +9,13 @@ handlers:
   static_files: favicon.ico
   upload: favicon\.ico
 
-- url: /rest/.*
+- url: /api/aires.*
+  script: main.APP
+
+- url: /tasks/stations.*
+  script: server.stations.STATIONS
+
+- url: /seed
   script: main.APP
 
 - url: (.*)/

@@ -1,0 +1,224 @@
+<div layout="column" class="map-container" flex layout-fill>
+    <md-toolbar class="md-hue-1 md-tall-media menu-togleable" layout="center" ng-class="{'md-tall' : $media('sm'), 'menu-togleable-opened' : $root.toggleable}">
+        <div layout="row" flex layout-fill class="md-toolbar-tools toolbar-menu">
+            <div flex="60" flex-sm="100" layout="column" layout-gt-md="row" layout-margin layout-align="center start" layout-align-gt-md="start center" layout-align-sm="space-around center">
+                <div layout="row" flex layout-fill layout-align="space-around center" style="max-height:32px">
+                    <div layout="row" layout-align="center center" class="margin-right-15">
+                        <md-button class="md-raised md-primary" ng-click="showGridBottomSheet()"><span class="icon-history2 icon-size"></span>
+                            <md-tooltip>
+                                Pollution history
+                            </md-tooltip>
+                        </md-button>
+                    </div>
+                    <div layout="row" layout-align="center center">
+                        <md-icon class="icon-sun icon-size"></md-icon>
+                        <md-switch ng-model="weatherButtonActive" ng-change="toggleWeather(weatherButtonActive)" aria-label="Switch 1">
+                        </md-switch>
+                        <md-tooltip>
+                            Weather
+                        </md-tooltip>
+                    </div>
+                    <div layout="row" layout-align="center center">
+                        <md-icon class="icon-stats-dots icon-size"></md-icon>
+                        <md-switch ng-model="elevationStatus" aria-label="Switch 1">
+                        </md-switch>
+                        <md-tooltip>
+                            Elevation
+                        </md-tooltip>
+                    </div>
+                    <div layout="row" layout-align="center center">
+                        <md-icon class="icon-blur-on icon-size"></md-icon>
+                        <md-switch ng-model="pollutionButtonActive" ng-change="togglePollution(pollutionButtonActive)" aria-label="Switch 1">
+                        </md-switch>
+                        <md-tooltip>
+                            Pollution
+                        </md-tooltip>
+                    </div>
+                </div>
+                <div layot="row" flex layout-fill layout-align="space-around center">
+                    <md-radio-group ng-model="travelMode" layout="row" flex layout-fill layout-align="space-around center" ng-change="changeTravelMode()">
+                        <md-radio-button value="WALKING" class="without-margin">
+                            <md-icon class="icon-directions-walk icon-size"></md-icon>
+                            <md-tooltip>
+                                Walk
+                            </md-tooltip>
+                        </md-radio-button>
+                        <md-radio-button value="BICYCLING" class="without-margin">
+                            <md-icon class="icon-directions-bike icon-size"></md-icon>
+                            <md-tooltip>
+                                Bike
+                            </md-tooltip>
+                        </md-radio-button>
+                        <md-radio-button value="TRANSIT" class="without-margin">
+                            <md-icon class="icon-directions-bus icon-size"></md-icon>
+                            <md-tooltip>
+                                Public Transport
+                            </md-tooltip>
+                        </md-radio-button>
+                        <md-radio-button value="DRIVING" class="without-margin">
+                            <md-icon class="icon-directions-car icon-size"></md-icon>
+                            <md-tooltip>
+                                Car
+                            </md-tooltip>
+                        </md-radio-button>
+                    </md-radio-group>
+                </div>
+            </div>
+            <div flex layout="row" layout-margin layout-align="end center">
+                <div class="average-indicator">Average in city:</div>
+                <md-whiteframe layout-padding="5" class="md-whiteframe-z1 white-color pollution-indicator" layout layout-align="center center">
+                    <div layout="row" ng-if="toxicElement == 1" ng-style="{'color' : toxic.dioxido.color}" layout-align="center center">
+                        <md-icon class="icon-shield"></md-icon><span>S02 : {{toxic.dioxido.value}} μg/m3</span>
+                        <md-tooltip md-direction="left">
+                            Sulfur Dioxide μg/m3
+                            <table class="tg" style="undefined;table-layout: fixed; width: 169px">
+                                <colgroup>
+                                    <col style="width: 102px">
+                                        <col style="width: 67px">
+                                </colgroup>
+                                <tr>
+                                    <th class="tg-hdt5">Good</th>
+                                    <th class="tg-s6z2">0 - 175</th>
+                                </tr>
+                                <tr>
+                                    <td class="tg-giv5">Admissible</td>
+                                    <td class="tg-s6z2">176 - 350</td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-4p84">Deficient</td>
+                                    <td class="tg-s6z2">351 - 525</td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-ti69">Bad</td>
+                                    <td class="tg-s6z2">> 525</td>
+                                </tr>
+                            </table>
+                        </md-tooltip>
+                    </div>
+                    <div layout="row" ng-if="toxicElement == 2" ng-style="{'color' : toxic.monoxido.color}" layout-align="center center">
+                        <md-icon class="icon-shield"></md-icon><span>CO : {{toxic.monoxido.value}} μg/m3</span>
+                        <md-tooltip md-direction="left">
+                            Carbon Monoxide μg/m3
+                            <table class="tg" style="undefined;table-layout: fixed; width: 169px">
+                                <colgroup>
+                                    <col style="width: 102px">
+                                        <col style="width: 67px">
+                                </colgroup>
+                                <tr>
+                                    <th class="tg-hdt5">Good</th>
+                                    <th class="tg-s6z2">0 - 5</th>
+                                </tr>
+                                <tr>
+                                    <td class="tg-giv5">Admissible</td>
+                                    <td class="tg-s6z2">6 - 10</td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-4p84">Deficient</td>
+                                    <td class="tg-s6z2">11 - 15</td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-ti69">Bad</td>
+                                    <td class="tg-s6z2">>15</td>
+                                </tr>
+                            </table>
+                        </md-tooltip>
+                    </div>
+                    <div layout="row" ng-if="toxicElement == 3" ng-style="{'color' : toxic.dioxnit.color}" layout-align="center center">
+                        <md-icon class="icon-shield"></md-icon><span>N02 : {{toxic.dioxnit.value}} μg/m3</span>
+                        <md-tooltip md-direction="left">
+                            Nitrogen Dioxide μg/m3
+                            <table class="tg" style="undefined;table-layout: fixed; width: 169px">
+                                <colgroup>
+                                    <col style="width: 102px">
+                                        <col style="width: 67px">
+                                </colgroup>
+                                <tr>
+                                    <th class="tg-hdt5">Good</th>
+                                    <th class="tg-s6z2">0 - 100</th>
+                                </tr>
+                                <tr>
+                                    <td class="tg-giv5">Admissible</td>
+                                    <td class="tg-s6z2">101 - 200</td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-4p84">Deficient</td>
+                                    <td class="tg-s6z2">201 - 300</td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-ti69">Bad</td>
+                                    <td class="tg-s6z2">>301</td>
+                                </tr>
+                            </table>
+                        </md-tooltip>
+                    </div>
+                    <div layout="row" ng-if="toxicElement == 4" ng-style="{'color' : toxic.particulas.color}" layout-align="center center">
+                        <md-icon class="icon-shield"></md-icon><span>PM10 : {{toxic.particulas.value}} μg/m3</span>
+                        <md-tooltip md-direction="left">
+                            Suspended Particles μg/m3
+                            <table class="tg" style="undefined;table-layout: fixed; width: 169px">
+                                <colgroup>
+                                    <col style="width: 102px">
+                                        <col style="width: 67px">
+                                </colgroup>
+                                <tr>
+                                    <th class="tg-hdt5">Good</th>
+                                    <th class="tg-s6z2">0 - 50</th>
+                                </tr>
+                                <tr>
+                                    <td class="tg-giv5">Admissible</td>
+                                    <td class="tg-s6z2">51 - 90</td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-4p84">Deficient</td>
+                                    <td class="tg-s6z2">91 - 150</td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-ti69">Bad</td>
+                                    <td class="tg-s6z2">>150</td>
+                                </tr>
+                            </table>
+                        </md-tooltip>
+                    </div>
+                    <div layout="row" ng-if="toxicElement == 5" ng-style="{'color' : toxic.ozono.color}" layout-align="center center">
+                        <md-icon class="icon-shield"></md-icon><span>03 : {{toxic.ozono.value}} μg/m3</span>
+                        <md-tooltip md-direction="left">
+                            Ozone μg/m3
+                            <table class="tg" style="undefined;table-layout: fixed; width: 169px">
+                                <colgroup>
+                                    <col style="width: 102px">
+                                        <col style="width: 67px">
+                                </colgroup>
+                                <tr>
+                                    <th class="tg-hdt5">Good</th>
+                                    <th class="tg-s6z2">0 - 90</th>
+                                </tr>
+                                <tr>
+                                    <td class="tg-giv5">Admissible</td>
+                                    <td class="tg-s6z2">90 - 180</td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-4p84">Deficient</td>
+                                    <td class="tg-s6z2">180 - 240</td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-ti69">Bad</td>
+                                    <td class="tg-s6z2">>240</td>
+                                </tr>
+                            </table>
+                        </md-tooltip>
+                    </div>
+                </md-whiteframe>
+            </div>
+        </div>
+    </md-toolbar>
+    <div class="buttons-container" ng-class="{'opened' : elevationStatus}">
+        <md-button class="md-fab mypos-button" ng-click="GoToRealPos()" aria-label="My position">
+            <md-icon class="icon-gps-fixed"></md-icon>
+        </md-button>
+        <md-button class="md-raised md-warn md-hue-2 cdistance-button" ng-show="distanceInfo.distance">{{distanceInfo.distance}} km</md-button>
+        <md-button class="md-raised md-warn md-hue-3 ctime-button" ng-show="distanceInfo.time">{{distanceInfo.time}}</md-button>
+    </div>
+    <div id="map-canvas" layout="horizontal" flex layout-fill>
+    </div>
+    <div id="elevation_chart" ng-class="{'opened' : elevationStatus}"></div>
+</div>

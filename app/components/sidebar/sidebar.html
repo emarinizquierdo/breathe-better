@@ -1,0 +1,93 @@
+<md-toolbar class="md-hue-3">
+    <h1 class="md-toolbar-tools">Menu</h1>
+</md-toolbar>
+<md-content class="md-padding" ng-controller="LeftCtrl">
+    <md-tabs md-selected="selectedIndex" md-stretch-tabs="never" class="overflow-hidden">
+        <md-tab>
+            <md-tab-label>
+                Route
+            </md-tab-label>
+            <md-content class="md-padding">
+                <p>Do you want to run, to cycle or to walk?</p>
+                <p> Do you want to know if the air you are breathing is good?</p>
+                <p>Don't worry! Choose your route and see the good path.</p>
+                <md-input-container md-no-float>
+                    <md-icon class="icon-location-on md-warn input-icon"></md-icon>
+                    <input id="origin-input" ng-model="directions.origin" ng-click="directions.origin=''" type="text" placeholder="Name">
+                </md-input-container>
+                <md-input-container md-no-float>
+                    <md-icon class="icon-location-on md-warn input-icon"></md-icon>
+                    <input id="destination-input" ng-model="directions.destination" ng-click="directions.destination=''" type="text" placeholder="Phone Number">
+                </md-input-container>
+                <md-button class="md-raised md-primary" ng-click="close()">Lets go!</md-button>
+            </md-content>
+        </md-tab>
+        <md-tab>
+            <md-tab-label>
+                Circular
+            </md-tab-label>
+            <md-content class="md-padding">
+                <p>Do you want to do a route but you don't want to think?</p>
+                <p> Don't worry, I will suggest you a circular route avoiding high pollution levels!</p>
+                <p>Hey! I am in beta, so may be you have to run a little more that what you want :-P</p>
+                <md-input-container>
+                    <label>Length (km)</label>
+                    <input required type="number" step="any" name="length" ng-model="circularRoute.length" min="0" max="500">
+                </md-input-container>
+                <md-button class="md-raised md-primary" ng-click="getCircular(circularRoute.length); close()">Lets go!</md-button>
+            </md-content>
+        </md-tab>
+    </md-tabs>
+    <div layout="column" layout-align="center center" class="margin-right-15">
+        <div layout="row">
+            <div layout="row" layout-align="center center">
+                <md-icon class="icon-directions-bike icon-size"></md-icon>
+                <md-switch ng-model="bicimadStatus" ng-change="bicimad.toggleBiciMad(bicimadStatus)" aria-label="Switch 1">
+                </md-switch>
+                <md-tooltip>
+                    BiciMad Stations
+                </md-tooltip>
+            </div>
+            <div layout="row" layout-align="center center">
+                <md-icon class="icon-transform icon-size"></md-icon>
+                <md-switch ng-model="bicycleLaneStatus" ng-change="bicimad.toggleCycloLane(bicycleLaneStatus)" aria-label="Switch 1">
+                </md-switch>
+                <md-tooltip>
+                    Bicycle Lane
+                </md-tooltip>
+            </div>
+        </div>
+        <div layout="row">
+            
+            <div layout="row" layout-align="center center">
+                <md-icon class="icon-road icon-size"></md-icon>
+                <md-switch ng-model="bicycleViaStatus" ng-change="bicimad.toggleCycloVia(bicycleViaStatus)" aria-label="Switch 1">
+                </md-switch>
+                <md-tooltip>
+                    Cycle Via
+                </md-tooltip>
+            </div>
+            <div layout="row" layout-align="center center">
+                <md-icon class="icon-settings-input-antenna icon-size"></md-icon>
+                <md-switch ng-model="pollutionStationsStatus" ng-change="bicimad.togglePollutionStations(pollutionStationsStatus)" aria-label="Switch 1">
+                </md-switch>
+                <md-tooltip>
+                    Pollution Stations
+                </md-tooltip>
+            </div>
+        </div>
+        <div layout="row">
+            <div layout="row" layout-align="center center">
+                <div> </div>
+                <md-select ng-model="pollutionParameter">
+                    <md-option value="01">SULFUR DIOXIDE</md-option>
+                    <md-option value="6" >CARBON MONOXIDE</md-option>
+                    <md-option value="8" >NITROGEN DIOXIDE</md-option>
+                    <md-option value="10">SUSPENDED PARTICLES (
+                        <10)</md-option>
+                            <md-option value="14" ng-selected="true">OZONE</md-option>
+                </md-select>
+            </div>
+        </div>
+    </div>
+</md-content>
