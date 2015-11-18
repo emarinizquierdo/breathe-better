@@ -32,7 +32,7 @@ angular.module('datafestApp')
 
             Aire.query({
                     id: day.getTime(),
-                    parameter: [1, 6, 8, 10, 14]
+                    parameter: "1,6,8,10,14"
                 }, function(data) {
 
                     for (var i = 0; i < data.length; i++) {

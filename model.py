@@ -1,6 +1,7 @@
 from google.appengine.ext import ndb
 import server.seed
 import datetime
+from datetime import timedelta
 
 class Aire(ndb.Model):
     id = ndb.StringProperty(indexed=False)
@@ -14,9 +15,13 @@ class Aire(ndb.Model):
     ce03 = ndb.IntegerProperty(indexed=False)
     station = ndb.StructuredProperty(server.seed.Station)
 
-def AllAire(parameter, year = 2015, month = 1, day = 1, hour = 1):
-  tempTime = datetime.datetime(int(year), int(month), int(day), int(hour), 0)
-  return Aire.query(Aire.parameter == int(parameter), Aire.timestamp == tempTime)
+def AllAire(parameters, year, month, day, hour):
+  if not hour:
+    minTime = datetime.datetime(int(year), int(month), int(day))
+    return Aire.query(Aire.parameter.IN(parameters), ndb.AND(minTime <= Aire.timestamp, Aire.timestamp <= minTime + datetime.timedelta(days=1)))
+  else:
+    tempTime = datetime.datetime(int(year), int(month), int(day), int(hour), 0)
+    return Aire.query(Aire.parameter.IN(parameters), Aire.timestamp == tempTime)
 
 def UpdateAire(id, timestamp, parameter, tecnic, period, value, ce01, ce02, ce03, station):
   aire = Aire(id=id, timestamp=timestamp, parameter=parameter, tecnic=tecnic, period=period, value=value, ce01=ce01, ce02=ce02, ce03=ce03, station=station)
