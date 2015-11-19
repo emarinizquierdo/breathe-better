@@ -15,7 +15,7 @@ angular.module('datafestApp')
                     year: p_date.getFullYear(),
                     month: p_date.getMonth() + 1,
                     day: p_date.getDate(),
-                    hour: p_date.getHours(),
+                    hour: p_date.getHours() - 1,
                     parameter: p_pollution_parameter
                 }, function(data) {
 

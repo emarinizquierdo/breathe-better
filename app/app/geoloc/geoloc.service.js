@@ -49,7 +49,8 @@ angular.module('datafestApp')
         };
 
         var _init = function() {
-            _geoloc.showPoints(40.4378271, -3.6795366);
+            //_geoloc.showPoints(40.4378271, -3.6795366);
+            _geoloc.GoToRealPos();
 
             $mdToast.show(
                 $mdToast.simple()

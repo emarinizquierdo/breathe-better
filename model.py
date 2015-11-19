@@ -16,10 +16,6 @@ class Aire(ndb.Model):
     station = ndb.StructuredProperty(server.seed.Station)
 
 def AllAire(parameters, year, month, day, hour):
-  if not hour:
-    minTime = datetime.datetime(int(year), int(month), int(day))
-    return Aire.query(Aire.parameter.IN(parameters), ndb.AND(minTime <= Aire.timestamp, Aire.timestamp <= minTime + datetime.timedelta(days=1)))
-  else:
     tempTime = datetime.datetime(int(year), int(month), int(day), int(hour), 0)
     return Aire.query(Aire.parameter.IN(parameters), Aire.timestamp == tempTime)
 

@@ -23,15 +23,13 @@ angular.module('datafestApp')
 
         var day = new Date();
 
-        day.setHours(day.getHours() - 2);
-        day.setMinutes(0);
-        day.setSeconds(0);
-        day.setMilliseconds(0);
-
         _toxic.get = function() {
 
             Aire.query({
-                    id: day.getTime(),
+                    year: day.getFullYear(),
+                    month: day.getMonth() + 1,
+                    day: day.getDate(),
+                    hour: day.getHours() - 2,
                     parameter: "1,6,8,10,14"
                 }, function(data) {
 

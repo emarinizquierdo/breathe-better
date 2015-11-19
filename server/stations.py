@@ -37,7 +37,7 @@ class Stations:
     response = urllib2.urlopen(self.url)
     rows = csv.DictReader( response, self.fieldnames)
     for row in rows:
-        hour = datetime.datetime.now().hour
+        hour = datetime.datetime.now().hour - 1
         stcode = int(str(row["ce01"]) + str(row["ce02"]) + str(row["ce03"]))
         station = server.seed.Station.query(server.seed.Station.StationCod==stcode).get()
         if station:
