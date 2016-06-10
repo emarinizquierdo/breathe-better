@@ -30,6 +30,7 @@ angular.module('datafestApp')
             zoomToObject(polyline);
 
             function zoomToObject(obj) {
+                debugger;
                 var bounds = new google.maps.LatLngBounds();
                 var points = obj.getPath().getArray();
                 for (var n = 0; n < points.length; n++) {

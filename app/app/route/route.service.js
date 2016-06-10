@@ -103,10 +103,16 @@ angular.module('datafestApp')
                     bounds.extend(points[n]);
                 }
 
-                MainMap.map.fitBounds(bounds);
+                if (!points[0].equals(points[1])){
+                    MainMap.map.fitBounds(bounds);
+                }else{
+                    MainMap.map.setZoom(12);
+                }
             }
 
+            
             zoomToObject(MainMap.objects.line);
+         
 
         };
 

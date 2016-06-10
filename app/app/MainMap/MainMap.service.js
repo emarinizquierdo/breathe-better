@@ -14,7 +14,7 @@ angular.module('datafestApp')
         var madrid = new google.maps.LatLng(40.4378271, -3.6795366);
 
         var mapOptions = {
-            zoom: 8,
+            zoom: 12,
             center: madrid,
             mapTypeId: google.maps.MapTypeId.TERRAIN
         }

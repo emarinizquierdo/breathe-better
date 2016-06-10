@@ -49,8 +49,10 @@ angular.module('datafestApp')
                 'samples': 512
             }
 
-            // Initiate the path request.
-            _chart.elevator.getElevationAlongPath(pathRequest, plotElevation);
+            if(path.length > 1){
+                // Initiate the path request.
+                _chart.elevator.getElevationAlongPath(pathRequest, plotElevation);
+            }
         }
 
         // Takes an array of ElevationResult objects, draws the path on the map

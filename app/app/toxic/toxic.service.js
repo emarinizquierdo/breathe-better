@@ -29,7 +29,7 @@ angular.module('datafestApp')
                     year: day.getFullYear(),
                     month: day.getMonth() + 1,
                     day: day.getDate(),
-                    hour: day.getHours() - 2,
+                    hour: day.getHours() - 4,
                     parameter: "1,6,8,10,14"
                 }, function(data) {
 
