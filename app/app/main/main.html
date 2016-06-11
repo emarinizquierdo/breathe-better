@@ -68,7 +68,7 @@
                 <div class="average-indicator">Average in city:</div>
                 <md-whiteframe layout-padding="5" class="md-whiteframe-z1 white-color pollution-indicator" layout layout-align="center center">
                     <div layout="row" ng-if="toxicElement == 1" ng-style="{'color' : toxic.dioxido.color}" layout-align="center center">
-                        <md-icon class="icon-shield"></md-icon><span>S02 : {{toxic.dioxido.value}} μg/m3</span>
+                        <md-icon class="icon-shield"></md-icon><span>S02 : {{toxic.dioxido.value | number:2}} μg/m3</span>
                         <md-tooltip md-direction="left">
                             Sulfur Dioxide μg/m3
                             <table class="tg" style="undefined;table-layout: fixed; width: 169px">
@@ -96,7 +96,7 @@
                         </md-tooltip>
                     </div>
                     <div layout="row" ng-if="toxicElement == 2" ng-style="{'color' : toxic.monoxido.color}" layout-align="center center">
-                        <md-icon class="icon-shield"></md-icon><span>CO : {{toxic.monoxido.value}} μg/m3</span>
+                        <md-icon class="icon-shield"></md-icon><span>CO : {{toxic.monoxido.value | number:2}} μg/m3</span>
                         <md-tooltip md-direction="left">
                             Carbon Monoxide μg/m3
                             <table class="tg" style="undefined;table-layout: fixed; width: 169px">
@@ -124,7 +124,7 @@
                         </md-tooltip>
                     </div>
                     <div layout="row" ng-if="toxicElement == 3" ng-style="{'color' : toxic.dioxnit.color}" layout-align="center center">
-                        <md-icon class="icon-shield"></md-icon><span>N02 : {{toxic.dioxnit.value}} μg/m3</span>
+                        <md-icon class="icon-shield"></md-icon><span>N02 : {{toxic.dioxnit.value | number:2}} μg/m3</span>
                         <md-tooltip md-direction="left">
                             Nitrogen Dioxide μg/m3
                             <table class="tg" style="undefined;table-layout: fixed; width: 169px">
@@ -152,7 +152,7 @@
                         </md-tooltip>
                     </div>
                     <div layout="row" ng-if="toxicElement == 4" ng-style="{'color' : toxic.particulas.color}" layout-align="center center">
-                        <md-icon class="icon-shield"></md-icon><span>PM10 : {{toxic.particulas.value}} μg/m3</span>
+                        <md-icon class="icon-shield"></md-icon><span>PM10 : {{toxic.particulas.value | number:2}} μg/m3</span>
                         <md-tooltip md-direction="left">
                             Suspended Particles μg/m3
                             <table class="tg" style="undefined;table-layout: fixed; width: 169px">
@@ -180,7 +180,7 @@
                         </md-tooltip>
                     </div>
                     <div layout="row" ng-if="toxicElement == 5" ng-style="{'color' : toxic.ozono.color}" layout-align="center center">
-                        <md-icon class="icon-shield"></md-icon><span>03 : {{toxic.ozono.value}} μg/m3</span>
+                        <md-icon class="icon-shield"></md-icon><span>03 : {{toxic.ozono.value | number:2}} μg/m3</span>
                         <md-tooltip md-direction="left">
                             Ozone μg/m3
                             <table class="tg" style="undefined;table-layout: fixed; width: 169px">
